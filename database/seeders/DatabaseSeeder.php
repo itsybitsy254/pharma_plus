@@ -18,28 +18,34 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // --- Create Admin User ---
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
-        ]);
+        if (!User::where('email', 'admin@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+            ]);
+        }
 
         // --- Create Pharmacist User ---
-        User::factory()->create([
-            'name' => 'Pharmacist User',
-            'email' => 'pharmacist@example.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'pharmacist',
-        ]);
+        if (!User::where('email', 'pharmacist@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Pharmacist User',
+                'email' => 'pharmacist@example.com',
+                'password' => Hash::make('12345678'),
+                'role' => 'pharmacist',
+            ]);
+        }
 
         // --- Create Cashier User ---
-        User::factory()->create([
-            'name' => 'Cashier User',
-            'email' => 'cashier@example.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'cashier',
-        ]);
+        if (!User::where('email', 'cashier@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Cashier User',
+                'email' => 'cashier@example.com',
+                'password' => Hash::make('12345678'),
+                'role' => 'cashier',
+            ]);
+        }
 
         // --- Seed other data ---
         Supplier::factory(10)->create();
